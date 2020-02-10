@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -20,7 +17,7 @@ public class UserController {
 
     @GetMapping("/list")
     public Flux<User> getAllUsers() {
-        Optional<Flux<User>> employees = userService.getAllUsers();
+        Flux<User> employees = userService.getAllUsers();
         return employees;
     }
 
