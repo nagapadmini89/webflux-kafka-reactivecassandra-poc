@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.ExecutionException;
+
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -27,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    public Mono<User> addUser(@RequestBody User user) {
+    public Mono<User> addUser(@RequestBody User user) throws ExecutionException, InterruptedException {
         Mono<User> savedData = userService.save(user);
         return savedData;
     }

@@ -1,32 +1,20 @@
 package com.mypoc.webfluxkafkareactivecassandrapoc.service;
 
 import com.mypoc.webfluxkafkareactivecassandrapoc.model.User;
-import com.mypoc.webfluxkafkareactivecassandrapoc.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Service
-public class UserService {
+import java.util.concurrent.ExecutionException;
 
-    @Autowired
-    private UserRepository userRepository;
+@Component
+public interface UserService {
 
-    public Flux<User> getAllUsers() {
-        Flux<User> users = userRepository.findAll();
-        return users;
-    }
+    public Flux<User> getAllUsers();
 
-    public Mono<User> getUserById(int id) {
-        return userRepository.findById(id);
-    }
+    public Mono<User> getUserById(int id);
 
-    public Mono<User> save(User user) {
-        return userRepository.save(user);
-    }
+    public Mono<User> save(User user) throws ExecutionException, InterruptedException ;
 
-    public Flux<User> getUsersFilterByAge(int age) {
-        return userRepository.findByAgeGreaterThan(age);
-    }
+    public Flux<User> getUsersFilterByAge(int age);
 }
